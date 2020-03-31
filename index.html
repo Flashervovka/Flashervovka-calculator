@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Calculator</title>
+    <script src="js/es6/builds_js/calculator/Calculator.js"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div>
+    <div>NumericInput</div>
+        <div id="numValidator"></div>
+    </div>
+    <div class="controls">
+        <div class="control"><span><b>Value: </b></span><span id="calcValue1">null</span></div>
+        <div class="control"><span><b>Text: </b></span><span id="calcText1"></span></div>
+        <div class="control"><span><b>Valid: </b></span><span id="calcValid1">true</span></div>
+
+        <div class="control"><button id="setText1">Set Text</button><input id="text1"/></div>
+        <div class="control"><button id="setValue1">Set Value</button><input id="value1"/></div>
+    </div>
+
+
+    <div>
+        <div>CalcInput</div>
+        <div id="calculatorWrapper"></div>
+    </div>
+
+
+    <div class="controls">
+        <div class="control"><span><b>Value: </b></span><span id="calcValue">null</span></div>
+        <div class="control"><span><b>Text: </b></span><span id="calcText"></span></div>
+        <div class="control"><span><b>Valid: </b></span><span id="calcValid">true</span></div>
+
+        <div class="control"><button id="setText">Set Text</button><input id="text"/></div>
+        <div class="control"><button id="setValue">Set Value</button><input id="value"/></div>
+
+        <div class="control"><button id="removeAll">remove all</button></div>
+    </div>
+
+
+
+    <div id="calculatorWrapper1"></div>
+    <script>
+        var calc = new Calculator('calculatorWrapper') ;
+        var validator = new Calculator('numValidator',true) ;
+
+        var calc1 = new Calculator('calculatorWrapper1',"calc_red") ;
+        var calcValue = document.querySelector('#calcValue');
+        var calcText = document.querySelector('#calcText');
+        var calcValid = document.querySelector('#calcValid');
+
+        var validatorValue = document.querySelector('#calcValue1');
+        var validatorText = document.querySelector('#calcText1');
+        var validatorValid = document.querySelector('#calcValid1');
+
+
+        document.querySelector("#removeAll").addEventListener('click',function (e) {
+            calc.destroy();
+            validator.destroy();
+        })
+
+        document.querySelector("#setText").addEventListener('click',function (e) {
+            calc.text = document.querySelector("#text").value;
+        });
+        document.querySelector("#setValue").addEventListener('click',function (e) {
+            calc.text = document.querySelector("#value").value;
+        })
+
+        document.querySelector("#setText1").addEventListener('click',function (e) {
+            validator.text = document.querySelector("#text1").value;
+        });
+        document.querySelector("#setValue1").addEventListener('click',function (e) {
+            validator.text = document.querySelector("#value1").value;
+        })
+
+
+        document.querySelector('#calculatorWrapper').addEventListener("ON_CALCULATED", function(event){
+            calcValue.innerHTML = calc.value;
+            calcText.innerHTML = calc.text;
+            calcValid.innerHTML = calc.isValid;
+           // console.log("event")
+         //   console.log(event)
+        }, false);
+
+        document.querySelector('#numValidator').addEventListener("ON_CALCULATED", function(event){
+            validatorValue.innerHTML = validator.value;
+            validatorText.innerHTML = validator.text;
+            validatorValid.innerHTML = validator.isValid;
+        }, false);
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+.control{
+    margin-top: 5px;
+    width: 320px;
+}
+.control button{
+    width: 80px;
+}
+.control input{
+    width: 236px;
+}
+
+
+.calc_red-main{
+    width: 320px;
+    height: 30px;
+    border: darkseagreen solid 1px;
+}
+.calc_red-input-field{
+    width: 240px;
+    height: 30px;
+    float: left;
+    border: 0;
+    padding: 0;
+    outline: none;
+    background-color: #ffd1ca;
+}
+.calc_red-result-field{
+    width: 80px;
+    height: 30px;
+    float: right;
+    background-color: #f97a7a;
+    line-height: 30px;
+    text-align: center;
+}
+
+.calc_red-filed-on-focus{
+    border: #6ca8f4 solid 2px;
+}
+.calc_red-main-invalid{
+    border: #ffd1ca solid 2px;
+}
+
+.calc_red-main-invalid.calc-filed-on-focus{
+    border: #ff5587 solid 2px;
+}
