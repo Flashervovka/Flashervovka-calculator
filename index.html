@@ -9,63 +9,80 @@
 </head>
 <body>
 <div>
-    <div>NumericInput</div>
+
+    <div class="wrapper-controll">
+        <div id="validator">
+            <div>Calc Input</div>
+            <div id="calculatorWrapper"></div>
+        </div>
+    </div>
+
+    <div class="wrapper-controll">
+        <div id="numValidatorWrapper">Numeric Input</div>
         <div id="numValidator"></div>
-    </div>
-    <div class="controls">
-        <div class="control"><span><b>Value: </b></span><span id="calcValue1">null</span></div>
-        <div class="control"><span><b>Text: </b></span><span id="calcText1"></span></div>
-        <div class="control"><span><b>Valid: </b></span><span id="calcValid1">true</span></div>
+        <div class="controls" id="controls1">
+            <div class="control"><span><b>Value: </b></span><span id="calcValue1">null</span></div>
+            <div class="control"><span><b>Text: </b></span><span id="calcText1"></span></div>
+            <div class="control"><span><b>Valid: </b></span><span id="calcValid1">true</span></div>
 
-        <div class="control"><button id="setText1">Set Text</button><input id="text1"/></div>
-        <div class="control"><button id="setValue1">Set Value</button><input id="value1"/></div>
-    </div>
-
-
-    <div>
-        <div>CalcInput</div>
-        <div id="calculatorWrapper"></div>
-    </div>
-
-
-    <div class="controls">
-        <div class="control"><span><b>Value: </b></span><span id="calcValue">null</span></div>
-        <div class="control"><span><b>Text: </b></span><span id="calcText"></span></div>
-        <div class="control"><span><b>Valid: </b></span><span id="calcValid">true</span></div>
-
-        <div class="control"><button id="setText">Set Text</button><input id="text"/></div>
-        <div class="control"><button id="setValue">Set Value</button><input id="value"/></div>
-
-        <div class="control"><button id="removeAll">remove all</button></div>
+            <div class="control"><button id="setText1">Set Text</button><input id="text1"/></div>
+            <div class="control"><button id="setValue1">Set Value</button><input id="value1"/></div>
+        </div>
     </div>
 
 
 
-    <div id="calculatorWrapper1"></div>
+
+
+
+    <div class="wrapper-controll">
+        <div>Calc Input Style</div>
+        <div id="calculatorWrapper1"></div>
+        <div class="controls" id="controls2">
+            <div class="control"><span><b>Value: </b></span><span id="calcValue">null</span></div>
+            <div class="control"><span><b>Text: </b></span><span id="calcText"></span></div>
+            <div class="control"><span><b>Valid: </b></span><span id="calcValid">true</span></div>
+
+            <div class="control"><button id="setText">Set Text</button><input id="text"/></div>
+            <div class="control"><button id="setValue">Set Value</button><input id="value"/></div>
+
+        </div>
+    </div>
+    <div class="control"><button id="removeAll">remove all</button></div>
+
     <script>
         var calc = new Calculator('calculatorWrapper') ;
+
         var validator = new Calculator('numValidator',true) ;
-
-        var calc1 = new Calculator('calculatorWrapper1',"calc_red") ;
-        var calcValue = document.querySelector('#calcValue');
-        var calcText = document.querySelector('#calcText');
-        var calcValid = document.querySelector('#calcValid');
-
         var validatorValue = document.querySelector('#calcValue1');
         var validatorText = document.querySelector('#calcText1');
         var validatorValid = document.querySelector('#calcValid1');
 
 
+        var calc1 = new Calculator('calculatorWrapper1',false,"calc_red") ;
+        var calcValue = document.querySelector('#calcValue');
+        var calcText = document.querySelector('#calcText');
+        var calcValid = document.querySelector('#calcValid');
+
+
+
         document.querySelector("#removeAll").addEventListener('click',function (e) {
             calc.destroy();
             validator.destroy();
-        })
+            calc1.destroy();
+            var ctrls = document.querySelectorAll('.wrapper-controll');
+            ctrls.forEach(function (element) {
+                element.remove();
+            });
+            var btnRemove = document.querySelector('#removeAll');
+            btnRemove.remove();
+        });
 
         document.querySelector("#setText").addEventListener('click',function (e) {
-            calc.text = document.querySelector("#text").value;
+            calc1.text = document.querySelector("#text").value;
         });
         document.querySelector("#setValue").addEventListener('click',function (e) {
-            calc.text = document.querySelector("#value").value;
+            calc1.text = document.querySelector("#value").value;
         })
 
         document.querySelector("#setText1").addEventListener('click',function (e) {
@@ -80,8 +97,6 @@
             calcValue.innerHTML = calc.value;
             calcText.innerHTML = calc.text;
             calcValid.innerHTML = calc.isValid;
-           // console.log("event")
-         //   console.log(event)
         }, false);
 
         document.querySelector('#numValidator').addEventListener("ON_CALCULATED", function(event){

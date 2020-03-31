@@ -43,3 +43,10 @@
 .calc_red-main-invalid.calc-filed-on-focus{
     border: #ff5587 solid 2px;
 }
+
+.wrapper-controll{
+    margin-bottom: 20px;
+    border: 1px solid black;
+    padding: 5px;
+    width: 325px;
+}
